@@ -1,3 +1,7 @@
+console.log(console); // prints out all details about console
+console.log(typeof console);
+
+
 console.log("Hey karan51ngh!"); // returns nothing
 
 console.error("This is for prininting errors in the console");
