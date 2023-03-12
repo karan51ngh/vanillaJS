@@ -1,14 +1,3 @@
-//  window is a global object
-// console.log(window)
-
-// DOM: Document Object Model
-
-console.log(document)
-document.body.style.background = "blue";
-
-// BOM: Browser Object Model
-console.log(document)
-
 /*
 
 The Window object: The Window object is the top-level object in the client-side JavaScript environment. 
@@ -25,3 +14,15 @@ It represents the structure of the document as a tree-like structure, with each 
 The DOM provides a way for scripts to access and manipulate the content and structure of a web page.
 
 */
+
+let a = window;
+// window.alert("Hello Friend!") AND alert("Hello Friend!") are the same, because window object is global
+a = window.document;
+a = window.innerHeight;
+a = window.innerWidth;
+a = scrollX;
+a= scrollY;
+a=window.location;
+a = location.toString();
+a= window.history;
+console.log(a);
