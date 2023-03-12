@@ -32,3 +32,18 @@ console.log(document.body.firstChild === document.body.childNodes[0])
 console.log(document.body.lastChild === document.body.childNodes[document.body.childNodes.length - 1])
 
 console.log(document.body.hasChildNodes()) // return True/False
+
+
+let a = document;
+a = document.all;
+a= document.body;
+a= document.forms;
+a= document.forms[0];
+
+a = document.all;
+a = Array.from(a).forEach(function(element){
+    console.log(element);    
+});
+
+// a = document.links;
+console.log(a);
