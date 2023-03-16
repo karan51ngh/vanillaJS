@@ -5,7 +5,7 @@ console.log(id1);
 console.log(id1.matches(".fake-class"));
 console.log(id1.matches(".box"));
 
-// closest looks for the nearest ancestor that matches the CSS selector
+// closest looks for the nearest ancestor that matches the CSS selector, starting from the element itself
 let sp1 = document.getElementById("sp1");
 console.log(sp1.closest(".box"));
 console.log(sp1.closest("#sp1"));
