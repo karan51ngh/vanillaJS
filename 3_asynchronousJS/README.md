@@ -72,8 +72,9 @@ var promise = new Promise(function(resolve, reject) {
     - To take several asynchronous calls and synchronize them one after the other, you can use promise chaining. 
     - This allows using a value from the first promise in later subsequent callbacks.
     ```js
-    Promise.resolve('some')
-    .then(function(string) { // <-- This will happen after the above Promise resolves (returning the value 'some')
+    Promise p1;
+    p1.resolve('some value');
+    p1.then(function(string) { // <-- This will happen after the above Promise resolves (returning the value 'some')
         return new Promise(function(resolve, reject) {
         setTimeout(function() {
             string += 'thing';
@@ -87,18 +88,63 @@ var promise = new Promise(function(resolve, reject) {
     ```
 ### Fetch API
 - The Fetch API is a built-in JavaScript feature that allows you to make network requests, such as fetching data from a server.
-- Example:
-    ```js
-    fetch('https://some-api.com/data')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-    ```
+- The `fetch()` function returns a **Promise** that **resolves** to the **Response object** representing the response to the request. You can chain .then() to handle the response once it's available and .catch() to handle any errors that may occur during the request.
+- The Response object represents the **response to a request** made using the Fetch API. It contains information about the response **status**, **headers**, and the actual **data**.
+- You can access the response data using various methods provided by the Response object:
+  - `json()`: Parses the response body as **JSON** and **returns a Promise** that resolves to the parsed data.
+  - `text()`: Reads the response body and **returns a Promise** that resolves to the **text** content.
+  - `blob()`: Returns a Promise that resolves to a Blob object representing the response body.
+  - `arrayBuffer()`: Returns a Promise that resolves to an ArrayBuffer containing the response body.
+- The fetch() function allows you to **configure** the request by providing an optional second parameter, an object literal, that allows you to set various request options such as method, headers, body, etc.
+- Example 1:
+  ```js
+  fetch('https://some-api.com/data')
+  .then((response) => { return response.json()})
+  .then((data) => {
+      console.log(data);
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+  ```
     - The fetch() method is used to make a request to the server located at "https://some-api.com/data". The returned value is a promise that will be fulfilled with the server's response.
     - The first .then() method is called to consume the promise and extract JSON data from the response.
-    - The next then() method is called to log the extracted data to the console.
+    - The next .then() method is called to use the extracted data to the console.
     - If any errors occur, they will be caught in the catch() method and logged to the console.
+- Example 2:
+  ```js
+  fetch('https://api.example.com/data', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ key: 'value' })
+  })
+    .then(response => {
+      // handle the response
+    })
+    .catch(error => {
+      // handle errors
+    });
+
+  ```
+- Handeling Errors:
+  - When using the Fetch API, errors are not automatically thrown for failed HTTP responses (e.g., 404 or 500 errors). Instead, the fetch() Promise only rejects when there is a network error or when the request is aborted.
+  - You need to explicitly check the ok property of the Response object to determine if the request was successful or not.
+  ```js
+  fetch('https://api.example.com/data')
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error('Request failed');
+      }
+    })
+    .then(data => {
+      // handle the parsed response data
+    })
+    .catch(error => {
+      // handle errors
+    });
+
+  ```
