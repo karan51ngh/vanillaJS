@@ -91,7 +91,7 @@ var promise = new Promise(function(resolve, reject) {
 - The `fetch()` function returns a **Promise** that **resolves** to the **Response object** representing the response to the request. You can chain .then() to handle the response once it's available and .catch() to handle any errors that may occur during the request.
 - The Response object represents the **response to a request** made using the Fetch API. It contains information about the response **status**, **headers**, and the actual **data**.
 - You can access the response data using various methods provided by the Response object:
-  - `json()`: Parses the response body as **JSON** and **returns a Promise** that resolves to the parsed data.
+  - `json()`: Parses the response body as **JSON** and **returns a Promise** that resolves to the parsed data. This is a promise, because parsing a data can be time consuming.
   - `text()`: Reads the response body and **returns a Promise** that resolves to the **text** content.
   - `blob()`: Returns a Promise that resolves to a Blob object representing the response body.
   - `arrayBuffer()`: Returns a Promise that resolves to an ArrayBuffer containing the response body.
@@ -131,11 +131,12 @@ var promise = new Promise(function(resolve, reject) {
 - Handeling Errors:
   - When using the Fetch API, errors are not automatically thrown for failed HTTP responses (e.g., 404 or 500 errors). Instead, the fetch() Promise only rejects when there is a network error or when the request is aborted.
   - You need to explicitly check the ok property of the Response object to determine if the request was successful or not.
+  - `response.ok` is a boolean indicating whether the response was successful (status in the range 200 – 299) or not.
   ```js
   fetch('https://api.example.com/data')
     .then(response => {
-      if (response.ok) {
-        return response.json();
+      if (response.ok) { // checks wether the status range is correct or not
+        return response.json(); //this is a promise
       } else {
         throw new Error('Request failed');
       }
