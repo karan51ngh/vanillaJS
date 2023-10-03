@@ -15,39 +15,31 @@ A promise is typically created using the Promise constructor, which takes a func
 - The reject function is used to reject the promise with a reason.
 */
 
-function aFunctionThatReturnsAPromise(x) {
-    const pr = new Promise((resolve, reject) => {
-        // resolve and reject are predefined functions
-        console.log("It's a slippery slope...");
-        if (x != 64) {
+function aFunctionThatReturnsAPromise() {
+    let p = new Promise((resolve, reject) => {
+        const randomInt = (Math.floor(Math.random() * 9) + 1) * 1000; // Generates a random integer between 1000 and 9000
+        if (randomInt >= 5000) {
             setTimeout(() => {
-                reject(new Error("I don't play Checkers!!!"));
-            }, 5000);
-
+                resolve("resolvedValue" + randomInt);
+            }, randomInt);
         }
         else {
-            setInterval(() => {
-                resolve("Chess");
-            }, 5000);
+            setTimeout(() => {
+                reject(Error("rejectedValue" + randomInt));
+            }, randomInt);
         }
     });
-    return pr;
+    return p;
 }
 
-const samplePr = aFunctionThatReturnsAPromise(6);
-console.log(samplePr);
-samplePr.then((data) => {
-    console.log(data);
-}).catch((err) => {
-    console.log(err.message);
-})
-
-console.log("Hello Friend!");
+let p1 = aFunctionThatReturnsAPromise();
+console.log(p1);
 setTimeout(() => {
-    console.log(samplePr);
-    samplePr.then((data) => {
-        console.log(data);
-    }).catch((err) => {
-        console.log(err.message);
-    })
-}, 7000);
+    console.log(p1);
+}, 10000)
+
+p1.then((val) => {
+    console.log(val);
+}).catch((error) => {
+    console.error(error);
+})
