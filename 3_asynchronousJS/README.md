@@ -107,9 +107,9 @@ var promise = new Promise(function(resolve, reject) {
       console.error('Error:', error);
   });
   ```
-    - The fetch() method is used to make a request to the server located at "https://some-api.com/data". The returned value is a promise that will be fulfilled with the server's response.
-    - The first .then() method is called to consume the promise and extract JSON data from the response.
-    - The next .then() method is called to use the extracted data to the console.
+    - The `fetch()`` method is used to make a **GET** request to the server located at "https://some-api.com/data". The returned value is a **promise** that will be fulfilled with the server's response.
+    - The first .then() method is called to **consume** the promise and **extract JSON data** as a **Promise** from the response.
+    - The next .then() method is called to **use** the **extracted data** (in this example it is simply printed to the console).
     - If any errors occur, they will be caught in the catch() method and logged to the console.
 - Example 2:
   ```js
@@ -128,6 +128,10 @@ var promise = new Promise(function(resolve, reject) {
     });
 
   ```
+      - The fetch() method is used to make a POST request to the server located at "https://api.example.com/data".
+      - `body: JSON.stringify({ key: 'value' })` is used to specify the HTTP request Body. 
+      - The returned value is a promise that will be fulfilled with the server's response.
+      - If any errors occur, they will be caught in the catch() method and logged to the console.
 - Handeling Errors:
   - When using the Fetch API, errors are not automatically thrown for failed HTTP responses (e.g., 404 or 500 errors). Instead, the fetch() Promise only rejects when there is a network error or when the request is aborted.
   - You need to explicitly check the ok property of the Response object to determine if the request was successful or not.
