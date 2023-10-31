@@ -1,5 +1,3 @@
-## JavaScript
-
 ### Synchronous vs Asynchronous nature of Javascript
 - **Synchronous** programming is a way for computers to do things **one step at a time**, in the order they are given the instructions.
 - However, synchronous programming can be problematic in certain situations, particularly when dealing with tasks that take a significant amount of time to complete.
@@ -151,5 +149,29 @@ var promise = new Promise(function(resolve, reject) {
     .catch(error => {
       // handle errors
     });
+
+  ```
+### File Handeling
+To read the contents of a file one common approach is to use the fs (file system) module, which is available in Node.js for server-side JavaScript.
+- We need to import the `fs` module: 
+  ```js
+  const fs = require('fs');
+  ```
+- For dealing with the path of various files, we can use the `path` module.
+  ```js
+  const path = require("path");
+  const filePath = path.resolve(__dirname, "hello.json");
+  ``` 
+- The `readFile()` function in Node.js is a part of the built-in fs (file system) module. `readFile()` is  designed to read the contents of a file asynchronously.
+- It takes the following arguments:
+  - **file path**: The path to the file you want to read.
+  - **encoding (optional)**: This is the character encoding to use when reading the file. If you're reading a text file, you can specify 'utf8' to decode the contents as a string.
+  - **callback function**: `readFile()` is an asynchronous function. It initiates the file reading operation and then calls a callback function when it's done. The callback function is executed once the file has been read or if an error occurs during the process. The callback function should take two parameters:
+    - **err**: If there is an error while reading the file, err will contain an error object; otherwise, it will be null.
+    - **data**: If the file is successfully read, data will contain the contents of the file as a string (if an encoding is specified) or as a buffer (if no encoding is specified).
+  ```js
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    // Callback function goes here
+  });
 
   ```
